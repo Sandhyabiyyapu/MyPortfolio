@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Navbar.css';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 const navLinks = [
   { id: 'hero', label: 'Home' },
@@ -38,10 +39,13 @@ const Navbar = () => {
     }
   };
 
+  const handleToggle = () => setMenuOpen(!menuOpen);
+  const handleClose = () => setMenuOpen(false);
+
   return (
     <nav className="navbar">
       <div className="navbar__logo">Sandhya'sPortfolio</div>
-      <div className={`navbar__links ${menuOpen ? 'open' : ''}`}>
+      <div className={`navbar__links${menuOpen ? ' open' : ''}`}>
         {navLinks.map(link => (
           <button
             key={link.id}
@@ -52,15 +56,9 @@ const Navbar = () => {
           </button>
         ))}
       </div>
-      <div
-        className={`navbar__hamburger${menuOpen ? ' open' : ''}`}
-        onClick={() => setMenuOpen(m => !m)}
-        aria-label="Toggle menu"
-      >
-        <span />
-        <span />
-        <span />
-      </div>
+      <button className="navbar__hamburger" onClick={handleToggle} aria-label="Toggle navigation">
+        {menuOpen ? <FaTimes /> : <FaBars />}
+      </button>
     </nav>
   );
 };
